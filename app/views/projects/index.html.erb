@@ -1,0 +1,32 @@
+<%= javascript_pack_tag 'projects', 'data-turbolinks-track': 'reload' %>
+<div class="wrapper">
+    <div class="menu">
+        <header class="menu__header">Задачи</header>
+        <button class="btn btn-clear menu__add-button" onclick="showAddProjectModal();">+</button>
+    </div>
+    <div class="projects-list">
+        <% @project.each do |p| %>
+            <div class="project-element project-id-<%= p['id'] %>">
+                <header class="project-element__header heder-id-<%= p['id'] %>">
+                    <%= p['title'] %>
+                </header>
+                <div class="project-element__todos todos-list">
+                    <% p['todos'].each do |t| %>
+                        <div class="todo-element todo-id-<%= t['id'] %>">
+                            <% if t['is_completed'] == true %>
+                                <input type="checkbox" class="todo-element__checkbox todo-checkbox-id-<%= t['id'] %>" onclick="updateTodo(this, <%= t['id'] %>, <%= p['id'] %>)" checked />
+                                <span class="todo-element__text todo-checked todo-text-id-<%= t['id'] %>"> <%= t['text'] %> </span>
+                            <% else %>
+                                <input type="checkbox" class="todo-element__checkbox todo-checkbox-id-<%= t['id'] %>" onclick="updateTodo(this, <%= t['id'] %>, <%= p['id'] %>)" />
+                                <span class="todo-element__text todo-text-id-<%= t['id'] %>"><%= t['text'] %></span>
+                            <% end %>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+    <script>
+        
+    </script>
+</div>
